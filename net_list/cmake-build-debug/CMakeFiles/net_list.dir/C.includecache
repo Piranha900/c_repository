@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/piranha900/git_folder/C/net_list/unix_list.c
+sys/socket.h
+-
+netdb.h
+-
+ifaddrs.h
+-
+stdio.h
+-
+stdlib.h
+-
+

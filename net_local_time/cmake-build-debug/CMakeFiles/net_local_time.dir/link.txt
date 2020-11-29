@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/net_local_time.dir/time_console.c.o  -o net_local_time 

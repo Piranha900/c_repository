@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/net_list.dir/unix_list.c.o  -o net_list 
