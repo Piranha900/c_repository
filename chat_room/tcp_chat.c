@@ -1,5 +1,4 @@
 #include "../useful_headers/headers.h"
-#include "../useful_functions/socket_fun.h"
 #include <ctype.h>
 
 
@@ -7,17 +6,30 @@ int main(){
 
   printf("Configuring local address...\n");
   struct addrinfo hints;
-  hints = configure_tcp_server(hints);
-
+  memset(&hints, 0, sizeof(hints));
+  hints.ai_family = AF_INET;
+  hints.ai_socktype = SOCK_STREAM;
+  hints.ai_flags = AI_PASSIVE;
+  
   struct addrinfo *bind_address;
   getaddrinfo(0, "8080", &hints, &bind_address);
 
   printf("Creating socket...\n");
   SOCKET socket_listen;
-  socket_listen = create_socket(bind_address);
+  socket_listen = socket(bind_address->ai_family,
+      bind_address->ai_socktype,
+      bind_address->ai_protocol);
+  if (!ISVALIDSOCKET(socket_listen)){
+    fprintf(stderr, "socket() failed. (%d)\n", GETSOCKETERRNO());
+    return 1;
+  }
   
   printf("Bind socket to local address...\n");
-  bind_socket(socket_listen, bind_address);
+  if (bind(socket_listen,
+        bind_address->ai_addr, bind_address->ai_addrlen)){
+    fprintf(stderr, "bind() failed. (%d)\n", GETSOCKETERRNO());
+    return 1;
+  }
   freeaddrinfo(bind_address);
 
   printf("Listening...\n");
@@ -54,6 +66,7 @@ int main(){
             fprintf(stderr, "accept() failed. (%d)\n", GETSOCKETERRNO());
             return 1;
           }
+          
           FD_SET(socket_client, &master);
           
           if(socket_client > max_socket)
@@ -75,8 +88,16 @@ int main(){
               CLOSESOCKET(i);
               continue;
           }
-        to_upper(read, bytes_received); 
-        send(i, read, bytes_received, 0);
+          
+          int j;
+          for (j = 1; j <= max_socket; ++j) {
+            if (FD_ISSET(j, &master)) {
+              if (j == socket_listen || j == i)
+                continue;
+              else
+                send(j, read, bytes_received, 0);
+            }
+          }
         }
       }
     }
