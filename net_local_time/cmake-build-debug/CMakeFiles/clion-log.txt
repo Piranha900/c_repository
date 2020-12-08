@@ -1,4 +1,0 @@
-/home/piranha900/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/203.5981.106/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/piranha900/git_folder/C/net_local_time
--- Configuring done
--- Generating done
--- Build files have been written to: /home/piranha900/git_folder/C/net_local_time/cmake-build-debug

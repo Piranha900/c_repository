@@ -1,3 +1,0 @@
-/home/piranha900/git_folder/C/net_list/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/piranha900/git_folder/C/net_list/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/piranha900/git_folder/C/net_list/cmake-build-debug/CMakeFiles/net_list.dir
