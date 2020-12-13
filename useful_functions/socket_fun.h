@@ -25,6 +25,13 @@ struct addrinfo configure_tcp_server(struct addrinfo hints){
   return hints;
 }
 
+struct addrinfo configure_udp_server(struct addrinfo hints){
+  memset(&hints, 0, sizeof(hints));
+  hints.ai_family = AF_INET;
+  hints.ai_socktype = SOCK_DGRAM;
+  hints.ai_flags = AI_PASSIVE;
+  return hints;
+}
 
 SOCKET create_socket(struct addrinfo *bind_address) {
   SOCKET socket_listen;

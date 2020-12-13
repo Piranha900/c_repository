@@ -1,4 +1,4 @@
-#include "../useful_headers/headers.h"
+#include "../../useful_headers/headers.h"
 
 int main(int argc, char *argv[]) {
   if (argc < 3){
@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
   printf("Configuring remote address...\n");
   struct addrinfo hints;
   memset(&hints, 0, sizeof(hints));
-  hints.ai_socktype = SOCK_STREAM;
+  hints.ai_socktype = SOCK_DGRAM;
   struct addrinfo *peer_address;
   if (getaddrinfo(argv[1], argv[2], &hints, &peer_address)){
     fprintf(stderr, "getaddrinfo() failed. (%d)\n", GETSOCKETERRNO());
